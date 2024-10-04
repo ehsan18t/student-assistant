@@ -34,7 +34,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="SemesterScreen" />
+        <Stack.Screen name="(tracker)/AddSemesterScreen" options={{title: 'Add New Semester'}} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>

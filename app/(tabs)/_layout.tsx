@@ -10,6 +10,7 @@ export default function TabLayout() {
 
   return (
     <Tabs
+        sceneContainerStyle={{ marginTop: 25 }}
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,

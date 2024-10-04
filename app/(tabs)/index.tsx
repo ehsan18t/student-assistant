@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Button, TouchableOpacity } from 'react-native';
+import { View, Text, Button,  StyleSheet } from 'react-native';
 import { getSemesters } from '@/db/database';
 import { router } from 'expo-router';
+import SemesterList from "@/components/SemesterList";
 
 const HomeScreen: React.FC<any> = () => {
   const [semesters, setSemesters] = useState([]);
@@ -12,26 +13,39 @@ const HomeScreen: React.FC<any> = () => {
     };
     fetchData();
   }, []);
+  
+  const handleOnDelete: any =  (semId) => {
+      
+  }
 
   return (
-      <View style={{ padding: 16 }}>
-        <Text>Semesters</Text>
-        <FlatList
-            data={semesters}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-                <TouchableOpacity
-                    onPress={() => {router.push({ pathname :"/SemesterScreen", params: { semesterId: item.id, name: item.name } })}}>
-                  <View style={{ padding: 16, backgroundColor: '#f0f0f0', marginBottom: 8 }}>
-                    <Text>{item.name}</Text>
-                    {item.date && <Text>{item.date}</Text>}
-                  </View>
-                </TouchableOpacity>
-            )}
-        />
-        <Button title="Add New Semester" onPress={() => {router.push("/SemesterScreen")}} />
+      <View>
+          <View style={styles.titleContainer}>
+              <Text style={styles.titleText}>Semesters</Text>
+          </View>
+          <View style={{ padding: 10 }}>
+            <SemesterList semesters={semesters} onDelete={handleOnDelete} />
+            <Button title="Add New Semester" onPress={() => {router.push("/AddSemesterScreen")}} />
+          </View>
       </View>
   );
 };
 
 export default HomeScreen;
+
+
+const styles = StyleSheet.create({
+    titleContainer: {
+        padding: 16,
+        backgroundColor: '#f0f0f0', // Background color for the title section
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc', // Border for separation
+        alignItems: 'center',
+    },
+    titleText: {
+        fontSize: 24, // Title font size
+        fontWeight: 'bold', // Title font weight
+        color: '#333', // Title font color
+        textAlign: 'center',
+    },
+});

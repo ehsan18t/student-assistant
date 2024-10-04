@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Alert } from 'react-native';
 import { addSemester } from '@/db/database';
+import { router } from 'expo-router';
 
 
-const SemesterScreen: React.FC<any> = () => {
+const AddSemesterScreen: React.FC<any> = () => {
     const [name, setName] = useState('');
     const [date, setDate] = useState('');
 
@@ -13,6 +14,7 @@ const SemesterScreen: React.FC<any> = () => {
             return;
         }
         addSemester(name, date);
+        router.push("/")
     };
 
     return (
@@ -34,4 +36,4 @@ const SemesterScreen: React.FC<any> = () => {
     );
 };
 
-export default SemesterScreen;
+export default AddSemesterScreen;
