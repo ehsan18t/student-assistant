@@ -18,3 +18,8 @@
 > 🔔 => Sends notifications on phone
 > 
 > 🔖 => Tracker
+
+<br>
+
+## Links
+ - [Server](https://github.com/ehsan18t/student-assistant-server)
