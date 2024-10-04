@@ -16,7 +16,7 @@ const TrackingScreen: React.FC<any> = () => {
 
     const handleOnDelete: any =  async (semId: any) => {
         deleteSemester(semId);
-        setSemesters(semesters.filter((semester) => semester.id !== semId));
+        setSemesters(semesters.filter((semester: any) => semester.id !== semId));
     }
 
     return (

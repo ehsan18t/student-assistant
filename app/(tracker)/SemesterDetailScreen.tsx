@@ -18,7 +18,7 @@ const SemesterDetailScreen: React.FC<any> = () => {
 
     const handleOnDelete: any =  async (courseId: any) => {
         deleteCourse(courseId);
-        setCourses(courses.filter((item) => item.id !== courseId));
+        setCourses(courses.filter((item: any) => item.id !== courseId));
     }
 
     return (

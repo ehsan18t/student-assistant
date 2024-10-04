@@ -51,7 +51,7 @@ export const addSemester = (name: string, date?: string) => {
 
 export const deleteSemester = (id: number) => {
   db.transaction((tx: any) => {
-    tx.executeSql("DELETE FROM semesters WHERE id = ?", [id], (_, resultSet) => {
+    tx.executeSql("DELETE FROM semesters WHERE id = ?", [id], (_: any, resultSet: any) => {
       console.log("Deleted semester with id: " + id);
     });
   });
@@ -88,7 +88,7 @@ export const addCourse = (
 
 export const deleteCourse = (id: number) => {
   db.transaction((tx: any) => {
-    tx.executeSql("DELETE FROM courses WHERE id = ?", [id], (_, resultSet) => {
+    tx.executeSql("DELETE FROM courses WHERE id = ?", [id], (_: any, resultSet: any) => {
       console.log("Deleted course with id: " + id);
     });
   });
@@ -131,7 +131,7 @@ export const addAssessment = (
 
 export const deleteAssessment = (id: number) => {
   db.transaction((tx: any) => {
-    tx.executeSql("DELETE FROM assessments WHERE id = ?", [id], (_, resultSet) => {
+    tx.executeSql("DELETE FROM assessments WHERE id = ?", [id], (_: any, resultSet: any) => {
       console.log("Deleted assessment with id: " + id);
     });
   });

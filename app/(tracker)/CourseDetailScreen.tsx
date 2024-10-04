@@ -18,7 +18,7 @@ const CourseDetailScreen: React.FC = () => {
 
     const handleOnDelete = async (assessmentId: any) => {
         deleteAssessment(assessmentId);
-        setAssessments(assessments.filter((item) => item.id !== assessmentId));
+        setAssessments(assessments.filter((item: any) => item.id !== assessmentId));
     }
 
     return (
