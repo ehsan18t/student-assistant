@@ -34,7 +34,7 @@ export default function RootLayout() {
         <Stack.Screen name="(tracker)/AddSemesterScreen" options={{title: 'Add New Semester'}} />
         <Stack.Screen name="(tracker)/AddCourseScreen" options={{title: 'Add New Course'}} />
         <Stack.Screen name="(tracker)/AddAssessmentsScreen" options={{title: 'Add New Assessment'}} />
-        <Stack.Screen name="(tracker)/CourseScreen" options={{title: 'Course List', headerShown: false}}  />
+        <Stack.Screen name="(tracker)/SemesterDetailScreen" options={{title: 'Semester Details', headerShown: false}}  />
         <Stack.Screen name="(tracker)/CourseDetailScreen" options={{title: 'Course Details', headerShown: false}}  />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />

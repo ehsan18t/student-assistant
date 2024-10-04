@@ -17,7 +17,7 @@ const AddCourseScreen: React.FC<any> = () => {
             return;
         }
         addCourse(Number(semesterId), name, code, credits, fullMarks);
-        router.push({ pathname: "/CourseScreen", params: { semesterId } });
+        router.push({ pathname: "/SemesterDetailScreen", params: { semesterId } });
     };
 
     return (

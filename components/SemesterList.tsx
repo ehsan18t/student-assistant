@@ -13,7 +13,7 @@ const SemesterList = ({ semesters, onDelete }: any) => {
                 <View style={styles.itemContainer}>
                     <TouchableOpacity
                         style={styles.touchable}
-                        onPress={() => { router.push({ pathname: "/CourseScreen", params: { semesterId: item.id } }); }}
+                        onPress={() => { router.push({ pathname: "/SemesterDetailScreen", params: { semesterId: item.id } }); }}
                     >
                         <View style={styles.textContainer}>
                             <Text style={styles.itemName}>{item.name}</Text>

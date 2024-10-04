@@ -4,7 +4,7 @@ import { getCourses, deleteCourse } from '@/db/database';
 import CourseList from "@/components/CourseList";
 import { router, useLocalSearchParams } from 'expo-router';
 
-const CouseScreen: React.FC<any> = () => {
+const SemesterDetailScreen: React.FC<any> = () => {
     const params = useLocalSearchParams();
     const { semesterId } = params;
     const [courses, setCourses] = useState([]);
@@ -24,7 +24,7 @@ const CouseScreen: React.FC<any> = () => {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Semesters</Text>
+                <Text style={styles.titleText}>Courses</Text>
             </View>
             <View style={{ padding: 10 }}>
                 <CourseList courses={courses} onDelete={handleOnDelete} />
@@ -34,7 +34,7 @@ const CouseScreen: React.FC<any> = () => {
     );
 };
 
-export default CouseScreen;
+export default SemesterDetailScreen;
 
 
 const styles = StyleSheet.create({
