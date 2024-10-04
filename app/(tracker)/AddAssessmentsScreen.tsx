@@ -19,8 +19,8 @@ const AddAssessmentsScreen: React.FC<any> = () => {
             Alert.alert('Error', 'All fields are required');
             return;
         }
-        addAssessment(courseId, name, type, expectedMarks, actualMarks, percentage, bestCount);
-        router.push("/CourseDetailScreen");
+        addAssessment(Number(courseId), name, type, expectedMarks, actualMarks, percentage, bestCount);
+        router.push({ pathname: "/CourseDetailScreen", params: { courseId } });
     };
 
     return (
