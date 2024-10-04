@@ -8,10 +8,7 @@ const HomeScreen: React.FC<any> = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-        const data: any = await getSemesters();
-        
-        console.log(data);
-      setSemesters(data);
+      getSemesters((data: any) => setSemesters(data));
     };
     fetchData();
   }, []);

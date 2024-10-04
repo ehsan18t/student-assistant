@@ -17,9 +17,8 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  useEffect(async () => {
-    
-    await createTables();
+  useEffect(() => {
+    createTables();
   }, []);
 
   useEffect(() => {
