@@ -7,7 +7,6 @@ import { Colors } from '@/constants/Colors';
 export default function TabLayout() {
   return (
     <Tabs
-        sceneContainerStyle={{ marginTop: 25 }}
       screenOptions={{
         tabBarActiveTintColor: Colors['light'].tint,
         headerShown: false,

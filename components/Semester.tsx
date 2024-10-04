@@ -3,23 +3,22 @@ import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-const Course = ({ item, onDelete }: any) => {
+const Semester = ({ item, onDelete }: any) => {
     return (
-        <View style={styles.itemContainer}>
-            <TouchableOpacity
-                style={styles.touchable}
-                onPress={() => { router.push({ pathname: "/CourseDetailScreen" as any, params: { courseId: item.id } }); }}>
-                <View style={styles.textContainer}>
-                    <Text style={styles.itemName}>{item.name}</Text>
-                    <Text style={styles.itemDetails}>
-                        {item.code} | Credits: {item.credits} | Full Marks: {item.full_marks}
-                    </Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => onDelete(item.id)}>
-                <AntDesign name="delete" size={24} color="#ff6347" />
-            </TouchableOpacity>
-        </View>
+            <View style={styles.itemContainer}>
+                <TouchableOpacity
+                    style={styles.touchable}
+                    onPress={() => { router.push({ pathname: "/SemesterDetailScreen", params: { semesterId: item.id } }); }}
+                >
+                    <View style={styles.textContainer}>
+                        <Text style={styles.itemName}>{item.name}</Text>
+                        {item.date && <Text style={styles.itemDate}>{item.date}</Text>}
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => onDelete(item.id)}>
+                    <AntDesign name="delete" size={24} color="#ff6347" />
+                </TouchableOpacity>
+            </View>
     );
 };
 
@@ -49,10 +48,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-    itemDetails: {
+    itemDate: {
         fontSize: 14,
         color: '#555',
     },
 });
 
-export default Course;
+export default Semester;
