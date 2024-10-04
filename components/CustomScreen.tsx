@@ -1,24 +1,29 @@
 import React, { ReactNode } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, FlatList } from 'react-native';
 
 // Define types for the props
 interface CustomScreenProps {
-    children: ReactNode;
+    data: any;
     title: string;
     button: ReactNode;
+    CustomItem: any
+    onDelete: any;
 }
 
-const CustomScreen: React.FC<CustomScreenProps> = ({ children, title, button }) => {
+const CustomScreen: React.FC<CustomScreenProps> = ({ data, title, button, CustomItem, onDelete }) => {
     return (
         <View style={styles.mainContainer}>
-            <ScrollView style={styles.scrollContainer}>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>{title}</Text>
-                </View>
-                <View style={styles.contentContainer}>
-                    {children}
-                </View>
-            </ScrollView>
+            <FlatList
+                data={data}
+                ListHeaderComponent={
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.titleText}>{title}</Text>
+                    </View>
+                }
+                ListEmptyComponent={<Text style={styles.emptyMessage}>No Item Available</Text>}
+                renderItem={({ item }) => <CustomItem item={item} onDelete={onDelete} />}
+                keyExtractor={(item) => item.id.toString()}
+            />
             <View style={styles.buttonContainer}>
                 {button}
             </View>
@@ -27,14 +32,10 @@ const CustomScreen: React.FC<CustomScreenProps> = ({ children, title, button }) 
 };
 
 export default CustomScreen;
-
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        paddingTop: 20
-    },
-    scrollContainer: {
-        flex: 1,
+        paddingTop: 20,
     },
     titleContainer: {
         padding: 16,
@@ -49,17 +50,37 @@ const styles = StyleSheet.create({
         color: '#333',
         textAlign: 'center',
     },
-    contentContainer: {
+    itemContainer: {
         padding: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#eee',
+    },
+    itemTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    itemType: {
+        fontSize: 14,
+        color: '#666',
+    },
+    itemDetails: {
+        fontSize: 14,
+        color: '#666',
+    },
+    emptyMessage: {
+        fontSize: 16,
+        color: '#555',
+        textAlign: 'center',
+        marginTop: 20,
     },
     buttonContainer: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
         padding: 16,
         backgroundColor: '#fff',
         borderTopWidth: 1,
         borderTopColor: '#ccc',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
     },
 });
