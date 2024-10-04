@@ -2,8 +2,8 @@
 **Mandatory**
 - [ ] University Notice 🔔 `Fardin`
 - [ ] Academic Calendar 🔔 `Shofi`
-- [ ] Educational Progress Tracker `Ehsan`
-- [ ] Class routine setter 🔔🔖 `Toufiq`
+- [ ] Educational Progress Tracker 🔖 `Ehsan`
+- [ ] Class routine setter 🔔 `Toufiq`
 
 <br>
 
