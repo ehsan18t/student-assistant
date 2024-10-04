@@ -23,12 +23,14 @@ export default function TabLayout() {
           ),
         }}
       />
+    
+  
       <Tabs.Screen
-        name="explore"
+        name="class-routine"
         options={{
-          title: 'Explore',
+          title: 'Class Routine',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'calendar' : 'calendar-outline'} color={color} />
           ),
         }}
       />
