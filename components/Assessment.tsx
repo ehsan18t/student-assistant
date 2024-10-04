@@ -24,16 +24,12 @@ const AssessmentList = ({ item, onDelete }: any) => {
 };
 
 const styles = StyleSheet.create({
-    mainContainer: {
-        marginTop: 10,
-    },
     itemContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 16,
-        marginLeft: 2,
-        marginRight: 2,
+        marginHorizontal: 10,
         backgroundColor: '#f0f0f0',
         marginBottom: 8,
         borderRadius: 8,

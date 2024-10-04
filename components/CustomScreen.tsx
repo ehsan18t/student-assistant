@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
-import { View, Text, ScrollView, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 
-// Define types for the props
 interface CustomScreenProps {
     data: any;
     title: string;
@@ -43,6 +42,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
         alignItems: 'center',
+        marginBottom: 10,
     },
     titleText: {
         fontSize: 24,
