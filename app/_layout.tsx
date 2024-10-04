@@ -4,17 +4,19 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { createTables } from '@/db/database';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
   });
+
+  useEffect(() => {
+    createTables();
+  }, []);
 
   useEffect(() => {
     if (loaded) {
@@ -27,8 +29,13 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={DefaultTheme}>
       <Stack>
+        <Stack.Screen name="(tracker)/AddSemesterScreen" options={{title: 'Add New Semester'}} />
+        <Stack.Screen name="(tracker)/AddCourseScreen" options={{title: 'Add New Course'}} />
+        <Stack.Screen name="(tracker)/AddAssessmentsScreen" options={{title: 'Add New Assessment'}} />
+        <Stack.Screen name="(tracker)/SemesterDetailScreen" options={{title: 'Semester Details', headerShown: false}}  />
+        <Stack.Screen name="(tracker)/CourseDetailScreen" options={{title: 'Course Details', headerShown: false}}  />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
