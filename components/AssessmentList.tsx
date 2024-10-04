@@ -1,24 +1,23 @@
 import React from 'react';
 import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-import { router } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-const CourseList = ({ courses, onDelete }: any) => {
+const AssessmentList = ({ assessments, onDelete }: any) => {
     return (
         <FlatList
             style={styles.mainContainer}
-            data={courses}
+            data={assessments}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
                 <View style={styles.itemContainer}>
-                    <TouchableOpacity
-                        style={styles.touchable}
-                        onPress={() => { router.push({ pathname: "/CourseDetailScreen", params: { courseId: item.id } }); }}
-                    >
+                    <TouchableOpacity style={styles.touchable}>
                         <View style={styles.textContainer}>
                             <Text style={styles.itemName}>{item.name}</Text>
                             <Text style={styles.itemDetails}>
-                                {item.code} | Credits: {item.credits} | Full Marks: {item.full_marks}
+                                Type: {item.type} | Expected Marks: {item.expected_marks}
+                            </Text>
+                            <Text style={styles.itemDetails}>
+                                Actual Marks: {item.actual_marks} | Percentage: {item.percentage}%
                             </Text>
                         </View>
                     </TouchableOpacity>
@@ -67,4 +66,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CourseList;
+export default AssessmentList;
