@@ -21,6 +21,15 @@ export default function TabLayout() {
           ),
         }}
       />
+        <Tabs.Screen
+            name="tracking"
+            options={{
+                title: 'Tracking',
+                tabBarIcon: ({ color, focused }) => (
+                    <TabBarIcon name={focused ? 'analytics' : 'analytics-outline'} color={color} />
+                ),
+            }}
+        />
       <Tabs.Screen
         name="explore"
         options={{

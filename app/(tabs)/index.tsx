@@ -1,32 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button,  StyleSheet } from 'react-native';
-import { getSemesters, deleteSemester } from '@/db/database';
-import { router } from 'expo-router';
-import SemesterList from "@/components/SemesterList";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
 
 const HomeScreen: React.FC<any> = () => {
-  const [semesters, setSemesters] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      getSemesters((data: any) => setSemesters(data));
-    };
-    fetchData();
-  }, []);
-  
-  const handleOnDelete: any =  async (semId: any) => {
-      deleteSemester(semId);
-      setSemesters(semesters.filter((semester) => semester.id !== semId));
-  }
-
   return (
       <View>
           <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>Semesters</Text>
+              <Text style={styles.titleText}>Home Page</Text>
           </View>
-          <View style={{ padding: 10 }}>
-            <SemesterList semesters={semesters} onDelete={handleOnDelete} />
-            <Button title="Add New Semester" onPress={() => {router.push("/AddSemesterScreen")}} />
+
+          <View>
+              <Text>Home Page Content</Text>
           </View>
       </View>
   );
