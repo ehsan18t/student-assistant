@@ -49,6 +49,15 @@ export const addSemester = (name: string, date?: string) => {
   });
 };
 
+export const deleteSemester = (id: number) => {
+  db.transaction((tx: any) => {
+    tx.executeSql("DELETE FROM semesters WHERE id = ?", [id], (_, resultSet) => {
+      console.log("Deleted semester with id: " + id);
+    });
+  });
+};
+
+
 export const getSemesters = (callback: (semesters: any[]) => void) => {
   db.transaction((tx: any) => {
     tx.executeSql(
@@ -77,10 +86,21 @@ export const addCourse = (
   });
 };
 
+export const deleteCourse = (id: number) => {
+  db.transaction((tx: any) => {
+    tx.executeSql("DELETE FROM courses WHERE id = ?", [id], (_, resultSet) => {
+      console.log("Deleted course with id: " + id);
+    });
+  });
+};
+
+
 export const getCourses = (
   semesterId: number,
   callback: (courses: any[]) => void
 ) => {
+  console.log("sem ID in DB", semesterId)
+  
   db.transaction((tx: any) => {
     tx.executeSql(
       "SELECT * FROM courses WHERE semester_id = ?",
@@ -108,6 +128,15 @@ export const addAssessment = (
     );
   });
 };
+
+export const deleteAssessment = (id: number) => {
+  db.transaction((tx: any) => {
+    tx.executeSql("DELETE FROM assessments WHERE id = ?", [id], (_, resultSet) => {
+      console.log("Deleted assessment with id: " + id);
+    });
+  });
+};
+
 
 export const getAssessments = (
   courseId: number,

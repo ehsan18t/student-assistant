@@ -3,21 +3,23 @@ import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native
 import { router } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-const SemesterList = ({ semesters, onDelete }: any) => {
+const CourseList = ({ courses, onDelete }: any) => {
     return (
         <FlatList
             style={styles.mainContainer}
-            data={semesters}
+            data={courses}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
                 <View style={styles.itemContainer}>
                     <TouchableOpacity
                         style={styles.touchable}
-                        onPress={() => { router.push({ pathname: "/CourseScreen", params: { semesterId: item.id } }); }}
+                        onPress={() => { router.push({ pathname: "/AddCourseScreen", params: { courseId: item.id } }); }}
                     >
                         <View style={styles.textContainer}>
                             <Text style={styles.itemName}>{item.name}</Text>
-                            {item.date && <Text style={styles.itemDate}>{item.date}</Text>}
+                            <Text style={styles.itemDetails}>
+                                {item.code} | Credits: {item.credits} | Full Marks: {item.full_marks}
+                            </Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => onDelete(item.id)}>
@@ -59,10 +61,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-    itemDate: {
+    itemDetails: {
         fontSize: 14,
         color: '#555',
     },
 });
 
-export default SemesterList;
+export default CourseList;

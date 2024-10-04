@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button,  StyleSheet } from 'react-native';
-import { getSemesters } from '@/db/database';
+import { getSemesters, deleteSemester } from '@/db/database';
 import { router } from 'expo-router';
 import SemesterList from "@/components/SemesterList";
 
@@ -14,8 +14,9 @@ const HomeScreen: React.FC<any> = () => {
     fetchData();
   }, []);
   
-  const handleOnDelete: any =  (semId) => {
-      
+  const handleOnDelete: any =  async (semId: any) => {
+      deleteSemester(semId);
+      setSemesters(semesters.filter((semester) => semester.id !== semId));
   }
 
   return (
