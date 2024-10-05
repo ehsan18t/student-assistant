@@ -8,6 +8,12 @@ export interface Calendar {
     details: string;
 }
 
+export interface Notice {
+    date: string;
+    title: string;
+    link: string;
+}
+
 export const fetchCalendarData = async () => {
     const url = 'https://www.uiu.ac.bd/academics/calendar/';
     let data: any[] = [];
@@ -35,5 +41,36 @@ export const fetchCalendarData = async () => {
     } catch (error) {
         console.error('Error fetching calendar data:', error);
         return { error: 'Failed to retrieve the calendar data.' };
+    }
+};
+
+// Scraping notice data
+export const fetchNoticeData = async () => {
+    const url = 'https://www.uiu.ac.bd/notice/';
+    let data: any[] = [];
+
+    try {
+        const response = await axios.get(url);
+        const html = response.data;
+        const $ = cheerio.load(html);
+
+        const noticeGrid = $('#notice-container .notice');
+
+        noticeGrid.each((index: Number, element: Notice) => {
+            const date = $(element).find('.date').text().trim();
+            const title = $(element).find('a').text().trim();
+            const link = $(element).find('a').attr('href');
+
+            data.push({
+                date,
+                title,
+                link,
+            });
+        });
+
+        return data;
+    } catch (error) {
+        console.error('Error fetching notices data:', error);
+        return { error: 'Failed to retrieve the notice data.' };
     }
 };

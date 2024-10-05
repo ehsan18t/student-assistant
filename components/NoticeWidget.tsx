@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Linking } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Linking, ActivityIndicator } from 'react-native';
 import moment from 'moment';
-
-type Notice = {
-    date: string;
-    title: string;
-    link: string;
-};
+import { Notice } from "@/functions/crawler";
 
 type NoticesWidgetProps = {
-    notices: Notice[];
+    notices: Notice[],
+    isLoading: boolean
 };
 
-const NoticesWidget: React.FC<NoticesWidgetProps> = ({ notices }) => {
+const NoticesWidget: React.FC<NoticesWidgetProps> = ({ notices, isLoading }: NoticesWidgetProps) => {
     const [showAll, setShowAll] = useState(false);
 
     const displayedNotices = showAll ? notices : notices.slice(0, 6);
@@ -37,6 +33,13 @@ const NoticesWidget: React.FC<NoticesWidgetProps> = ({ notices }) => {
                 data={displayedNotices}
                 renderItem={renderNoticeItem}
                 keyExtractor={(item, index) => index.toString()}
+                ListEmptyComponent={
+                    isLoading ?
+                        (<ActivityIndicator animating={true} color={"#333"} />)
+                        :
+                        (<View>
+                            <Text>0 results</Text>
+                        </View>)}
             />
             <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewMore}>
                 <Text style={styles.viewMoreText}>{showAll ? 'View Less' : 'View All'}</Text>
