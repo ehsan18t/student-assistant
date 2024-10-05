@@ -99,7 +99,6 @@ export const getCourses = (
   semesterId: number,
   callback: (courses: any[]) => void
 ) => {
-  console.log("sem ID in DB", semesterId)
   
   db.transaction((tx: any) => {
     tx.executeSql(
@@ -149,6 +148,26 @@ export const getAssessments = (
       (_: any, { rows: { _array } }: any) => {
         callback(_array);
       }
+    );
+  });
+};
+
+export const fetchCourseContributions = (semester_id: number, callback: (data: any) => void) => {
+  db.transaction((tx) => {
+    tx.executeSql(
+        `SELECT name, credits FROM courses WHERE semester_id = ?`,
+        [semester_id],
+        (_, { rows }) => {
+          const courses = rows._array;
+          const totalCredits = courses.reduce((sum, course) => sum + parseFloat(course.credits), 0);
+
+          const contributions = courses.map((course) => ({
+            name: course.name,
+            percentage: Number(((course.credits) / totalCredits) * 100)
+          }));
+
+          callback(contributions);
+        }
     );
   });
 };

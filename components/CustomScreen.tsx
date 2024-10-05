@@ -7,11 +7,13 @@ interface CustomScreenProps {
     button: ReactNode;
     CustomItem: any
     onDelete: any;
+    chart?: any
 }
 
-const CustomScreen: React.FC<CustomScreenProps> = ({ data, title, button, CustomItem, onDelete }) => {
+const CustomScreen: React.FC<CustomScreenProps> = ({ data, title, button, CustomItem, onDelete, chart }) => {
     return (
         <View style={styles.mainContainer}>
+            {chart}
             <FlatList
                 data={data}
                 ListHeaderComponent={
