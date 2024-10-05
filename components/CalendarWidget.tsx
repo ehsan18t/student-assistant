@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, Button, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
 import moment from 'moment';
 
 const formatDate = (date: string) => {
@@ -22,27 +22,32 @@ const formatDate = (date: string) => {
 };
 
 
-// Function to filter upcoming events (next 7 days)
-const getUpcomingEvents = (calendar: any[]) => {
+// Function to filter upcoming events
+const getUpcomingEvents = (calendar: any[], days: number) => {
     return calendar.filter(event => {
         const eventDate = moment(event.date.split("–")[0].trim(), ["MMM D, YYYY", "MMMM D, YYYY"]);
-        return eventDate.isAfter(moment()) && eventDate.diff(moment(), 'days') <= 7;
+        return eventDate.isAfter(moment()) && eventDate.diff(moment(), 'days') <= days;
     });
 };
 
-const CalendarWidget = ({ calendar }: { calendar: any[] }) => {
+const CalendarWidget = ({ calendar, isLoading }: any) => {
     const [viewAll, setViewAll] = useState(false);
     const [eventsToShow, setEventsToShow] = useState<any[]>([]);
 
     useEffect(() => {
-        setEventsToShow(viewAll ? calendar : getUpcomingEvents(calendar));
+        setEventsToShow(viewAll ? getUpcomingEvents(calendar, 200) : getUpcomingEvents(calendar, 7));
     }, [viewAll, calendar]);
 
     return (
         <View style={styles.widgetContainer}>
             <Text style={styles.title}>Upcoming Academic Events</Text>
             <ScrollView style={styles.eventList}>
-                {eventsToShow.map((event, index) => (
+                {isLoading && (
+                    <View style={styles.eventItem}>
+                        <ActivityIndicator animating={true} color={"#333"} />
+                    </View>
+                )}
+                {!isLoading && eventsToShow.map((event, index) => (
                     <View key={index} style={styles.eventItem}>
                         <Text style={styles.eventDate}>{formatDate(event.date)}</Text>
                         <Text style={styles.eventDetails}>{event.details}</Text>
@@ -70,6 +75,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 12,
+        textAlign: 'center',
     },
     eventList: {
         maxHeight: 400, // Limit height when showing the upcoming 7 days
