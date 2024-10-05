@@ -11,7 +11,7 @@ class NotificationService {
     });
   }
 
-  // Schedules a notification to be sent at a specific date
+
   scheduleNotification(title: string, message: string, date: Date) {
     PushNotification.localNotificationSchedule({
       title: title,
