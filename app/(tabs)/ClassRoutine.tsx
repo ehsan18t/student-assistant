@@ -80,7 +80,8 @@ export default function ClassRoutine() {
       );
       setClassList(updatedClasses);
       await saveClasses(updatedClasses);
-        setEditMode(false);
+      setEditMode(false);
+      setEditClassId(null);  // Reset this too
     } else {
       const updatedClasses = [...classList, newClass];
       setClassList(updatedClasses);
@@ -92,9 +93,6 @@ export default function ClassRoutine() {
     // Clear input fields after saving
     setClassName('');
     setClassTime(null);
-
-    // Fetch and update the list after adding a new class
-    await loadClasses();
   };
 
   const scheduleRecurringNotification = (newClass: ClassItem) => {
@@ -118,7 +116,12 @@ export default function ClassRoutine() {
     if (classToEdit) {
       setClassName(classToEdit.className);
       setDayOfWeek(classToEdit.dayOfWeek);
-      setClassTime(new Date(`1970-01-01T${classToEdit.classTime}:00`));
+
+      const [hours, minutes] = classToEdit.classTime.split(':');
+      const editedTime = new Date();
+      editedTime.setHours(Number(hours), Number(minutes));
+      setClassTime(editedTime);
+
       setEditMode(true);
       setEditClassId(id);
     }
@@ -213,31 +216,34 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 5,
   },
+  picker: {
+    height: 50,
+    width: '100%',
+    marginBottom: 20,
+  },
   classItem: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 10,
-    borderRadius: 5,
+    padding: 15,
+    backgroundColor: '#f9f9f9',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
   },
   className: {
     fontSize: 18,
+    fontWeight: 'bold',
   },
   classDate: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 16,
+    color: '#555',
   },
   actionButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 10,
   },
   editButton: {
-    color: 'blue',
+    color: '#007BFF',
   },
   deleteButton: {
-    color: 'red',
-  },
-  picker: {
-    marginBottom: 20,
+    color: '#FF0000',
   },
 });
